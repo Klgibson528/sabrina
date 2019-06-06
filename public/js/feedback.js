@@ -1,9 +1,9 @@
 $(function () {
-
+  $.getJSON('api', updateFeedback)
   $('form').submit(function (e) {
     e.preventDefault();
 
-    $.getJSON('api', updateFeedback)
+
 
     $.post("/api", {
       name: $("#name").val(),
@@ -11,11 +11,17 @@ $(function () {
       textarea: $("#message").val()
     }, updateFeedback)
 
+    var nameInput = document.getElementById('name')
+    var emailInput = document.getElementById('email')
+    nameInput.value = ""
+    emailInput.value = ""
+
   })
 
 
   function updateFeedback(data) {
     let msg = ""
+    console.log(data)
     data.forEach(value => {
       msg += `<br>`
       msg += `<br>`
